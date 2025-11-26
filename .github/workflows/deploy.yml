@@ -1,34 +1,50 @@
 # .github/workflows/deploy.yml
-name: Deploy to GitHub Pages
+name: Deploy Vue App to Pages
 
 on:
   push:
     branches:
-      - main # 只有 main 分支推送时才触发部署
+      - main # 只有 main 分支推送时才触发
+  workflow_dispatch: # 允许手动触发
+
+# 必须设置权限，这是解决 403 错误的根本
+permissions:
+  contents: read     # 读取代码
+  pages: write       # 写入 Pages Artifact
+  id-token: write    # 用于 OIDC 身份验证
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions: 
-      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '22' # 使用合适的 Node. 版本
+          node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build # 执行构建命令，生成 dist 目录
+      - name: Build Vue Project
+        run: npm run build # 执行构建，生成 dist 文件夹
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # 指定上传的静态文件目录
-          # 默认部署到 gh-pages 分支
+          path: './dist' # 上传构建后的静态文件目录
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build # 确保在构建成功后才进行部署
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # 官方部署 Action
