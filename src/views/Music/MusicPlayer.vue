@@ -17,7 +17,7 @@
       </header>
 
       <div class="player-main" :class="{ 'mini-mode': miniMode }">
-        <div class="player-left" v-show="!miniMode">
+<div class="player-left" v-show="!miniMode">
           <div class="album-art-container">
             <div class="album-art-wrapper" :class="{ 'playing': isPlaying }">
               <img 
@@ -26,8 +26,7 @@
                 class="album-art"
                 @error="handleImageError"
               />
-              <div class="album-art-overlay">
-              </div>
+              <div class="album-art-overlay"></div>
             </div>
             
             <div class="song-info">
@@ -39,7 +38,9 @@
                 <span class="song-tag" v-for="tag in currentSong.tags" :key="tag">{{ tag }}</span>
               </div>
             </div>
-            
+          </div>
+          
+          <div class="controls-container">
             <div class="song-progress">
               <div class="progress-info">
                 <span class="current-time">{{ formatTime(currentTime) }}</span>
@@ -57,9 +58,7 @@
                 ></div>
               </div>
             </div>
-          </div>
-          
-          <div class="controls-container">
+
             <div class="playback-controls">
               <button class="btn-control prev" @click="playPrev" title="上一曲">
                 <i class="icon-prev"></i>
@@ -1031,9 +1030,12 @@ watch(playMode, (newMode) => {
   color: #a0a0ff;
 }
 
-/* 进度条 */
+/* 修改进度条样式 */
 .song-progress {
-  margin-top: 20px;
+  /* 移除原来的 margin-top: 25px */
+  margin-top: 0;
+  margin-bottom: 20px; /* 给下方的按钮留出空间 */
+  width: 100%;
 }
 
 .progress-info {
@@ -1041,7 +1043,20 @@ watch(playMode, (newMode) => {
   justify-content: space-between;
   margin-bottom: 8px;
   font-size: 0.85rem;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.6); /* 稍微调亮一点文字颜色 */
+  font-weight: 500;
+}
+
+/* 进度条轨道背景 */
+.progress-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1); /* 确保轨道可见 */
+  border-radius: 3px;
 }
 
 .progress-bar {
@@ -1143,13 +1158,15 @@ watch(playMode, (newMode) => {
   border: none;
 }
 
-/* 控制区域 - 修改样式以适应左侧 */
+/* 确保控制容器布局合理 */
 .controls-container {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  padding: 20px;
+  padding: 25px; /* 增加一点内边距 */
   border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: auto; /* 放在底部 */
+  margin-top: auto; 
+  display: flex;
+  flex-direction: column; /* 垂直排列：上进度条，下按钮 */
 }
 
 .playback-controls {
