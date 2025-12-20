@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/views/Layout/index.vue'
 import Login from '@/views/Login/index.vue'
+import Music from '@/views/Music/MusicPlayer.vue'
+
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -17,6 +19,11 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/music',
+      name: 'Music',
+      component: Music
     }
   ],
   scrollBehavior() {

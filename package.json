@@ -19,7 +19,8 @@
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "^3.5.22",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "vue3-music-player": "^0.0.5"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
