@@ -284,7 +284,7 @@ const playlist = ref([
     src: 'https://music.163.com/song/media/outer/url?id=692641.mp3',
     duration: 319,
     tags: ['J-Pop'],
-    lyrics: 'https://meting-api-omega.vercel.app/api?server=netease&type=lrc&id=692641',
+    lyrics: 'https://api.paugram.com/netease/?id=692641',
     lyricsData: [] // 用于存储解析后的歌词数据
   },
   {
@@ -296,7 +296,7 @@ const playlist = ref([
     src: 'https://music.163.com/song/media/outer/url?id=410446170.mp3',
     duration: 212,
     tags: ['Pure-Music'],
-    lyrics: 'https://meting-api-omega.vercel.app/api?server=netease&type=lrc&id=410446170',
+    lyrics: 'https://api.paugram.com/netease/?id=410446170',
     lyricsData: [] // 用于存储解析后的歌词数据
   },
   {
@@ -308,7 +308,7 @@ const playlist = ref([
     src: 'https://music.163.com/song/media/outer/url?id=494642787.mp3',
     duration: 292,
     tags: ['J-Pop'],
-    lyrics: 'https://meting-api-omega.vercel.app/api?server=netease&type=lrc&id=494642787',
+    lyrics: 'https://api.paugram.com/netease/?id=494642787',
     lyricsData: [] // 用于存储解析后的歌词数据
   },    
   {
@@ -320,7 +320,7 @@ const playlist = ref([
     src: 'https://music.163.com/song/media/outer/url?id=28466084.mp3',
     duration: 284,
     tags: ['J-Pop'],
-    lyrics: 'https://meting-api-omega.vercel.app/api?server=netease&type=lrc&id=28466084',
+    lyrics: 'https://api.paugram.com/netease/?id=28466084',
     lyricsData: [] // 用于存储解析后的歌词数据
   },
   {
@@ -332,7 +332,7 @@ const playlist = ref([
     src: 'https://music.163.com/song/media/outer/url?id=630896.mp3',
     duration: 299,
     tags: ['J-Pop'],
-    lyrics: 'https://meting-api-omega.vercel.app/api?server=netease&type=lrc&id=630896',
+    lyrics: 'https://api.paugram.com/netease/?id=630896',
     lyricsData: [] // 用于存储解析后的歌词数据
   }
 
@@ -390,8 +390,10 @@ const fetchLyrics = async (lyricsUrl) => {
     if (!response.ok) {
       throw new Error(`歌词获取失败: ${response.status}`)
     }
-    
-    const lrcText = await response.text()
+//  这里用了新的api，所以得改
+//  const lrcText1 = await response.text()  
+    const lrcText1 = await response.json()
+    const lrcText = await lrcText1["lyric"]
     
     // 检查返回内容是否有效
     if (!lrcText || lrcText.includes('Lyric not found') || lrcText.includes('未找到歌词')) {
