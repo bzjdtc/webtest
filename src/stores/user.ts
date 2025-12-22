@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
   
   // 模拟数据库
   const mockUsers = ref<MockUser[]>([
-    { account: 'admin', password: '123456', name: '系统管理员', role: 'admin' }
+    { account: 'admin', password: '123456', name: 'Admin', role: 'admin' }
   ])
 
   // 注册 Action
