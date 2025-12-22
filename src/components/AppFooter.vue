@@ -1,3 +1,9 @@
+<script setup lang="ts">
+
+import appQrCode from '@/assets/ui/app.png'
+
+</script>
+
 <template>
   <footer class="bg-white pt-20 pb-10 border-t border-gray-100">
     <div class="container mx-auto px-4 max-w-7xl flex flex-col md:flex-row justify-between gap-8">
@@ -21,9 +27,13 @@
         <!-- 二维码 -->
         <div class="flex gap-4">
             <div class="w-24 h-24 bg-gray-100 rounded flex items-center justify-center text-xs text-gray-400">
-                <image src="src/assets/ui/app.png"></image>
-                
+                <img :src=appQrCode></img>  
             </div>
+            
+            <div class="text-xs space-y-2 flex flex-col justify-center">
+                <p>扫描二维码</p>
+                <p>立马下载APP</p>
+          </div>
         </div>
     </div>
     <div class="container mx-auto mt-10 pt-10 border-t border-gray-100 text-center text-gray-400 text-xs">
