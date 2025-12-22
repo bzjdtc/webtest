@@ -56,7 +56,7 @@ const handleLogin = async () => {
         <!-- 右侧表单 -->
         <div class="w-full md:w-1/2 p-10 flex flex-col justify-center">
           <h2 class="text-2xl font-bold text-gray-800 mb-2">账户登录</h2>
-          <p class="text-gray-400 text-sm mb-8">默认账号: admin / 123456</p>
+          <p class="text-gray-400 text-sm mb-8"></p>
 
           <div class="space-y-4">
             <div class="space-y-1">
@@ -74,6 +74,13 @@ const handleLogin = async () => {
                <span v-if="loading" class="animate-spin mr-2">⏳</span>
                {{ loading ? '登录中...' : '登 录' }}
             </button>
+
+            <div class="text-center text-sm text-gray-500 mt-4">
+              没有账号？
+              <router-link to="/signin" class="text-emerald-500 font-bold hover:underline">
+                立即注册
+              </router-link>
+            </div>
 
             <div class="flex items-center gap-2 pt-4">
                <input v-model="form.agree" type="checkbox" id="agree" class="accent-emerald-500 w-4 h-4 cursor-pointer">

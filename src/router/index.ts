@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/views/Layout/index.vue'
 import Login from '@/views/Login/index.vue'
 import Music from '@/views/Music/MusicPlayer.vue'
-
+import Cart from '@/views/Cart/index.vue'
+import Signin from '@/views/Signin/index.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,15 @@ const router = createRouter({
       path: '/music',
       name: 'Music',
       component: Music
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
+    },
+    { path: '/signin',
+      name: 'Signin',
+      component: Signin  
     }
   ],
   scrollBehavior() {

@@ -17,7 +17,7 @@
       </header>
 
       <div class="player-main" :class="{ 'mini-mode': miniMode }">
-<div class="player-left" v-show="!miniMode">
+      <div class="player-left" v-show="!miniMode">
           <div class="album-art-container">
             <div class="album-art-wrapper" :class="{ 'playing': isPlaying }">
               <img 

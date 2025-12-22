@@ -39,7 +39,7 @@ const handleLogout = () => {
             <!-- 搜索框 (省略...) -->
 
             <!-- 购物车 -->
-            <div class="relative cursor-pointer group">
+            <div class="relative cursor-pointer group" @click="router.push('/cart')">
                 <ShoppingCart class="w-6 h-6 text-gray-600 hover:text-emerald-500" />
                 <span v-if="cartStore.totalCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
                     {{ cartStore.totalCount }}
@@ -60,7 +60,8 @@ const handleLogout = () => {
                 <template v-else>
                     <router-link to="/login" class="text-emerald-500 font-medium hover:underline">请先登录</router-link>
                     <span class="text-gray-300">|</span>
-                    <a href="#" class="text-gray-500 hover:text-gray-800">免费注册</a>
+                    <router-link to="/signin" class="text-gray-500 hover:text-gray-800">免费注册</router-link>
+                    <!-- <a href="#" class="text-gray-500 hover:text-gray-800">免费注册</a> -->
                 </template>
             </div>
         </div>
