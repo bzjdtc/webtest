@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useCartStore } from '@/stores/cart'
@@ -12,6 +13,20 @@ const cartStore = useCartStore()
 const router = useRouter()
 
 const { userInfo } = storeToRefs(userStore)
+
+// 搜索框逻辑
+const searchQuery = ref('')
+const handleSearch = () => {
+  if (!searchQuery.value.trim()) return
+
+  console.log('正在搜索:', searchQuery.value)
+  router.push({
+    path: '/category/all',
+    query: { q: searchQuery.value }
+  })
+  // 搜索后清空输入框
+  searchQuery.value = ''
+}
 
 const handleLogout = () => {
   userStore.logout()
@@ -36,7 +51,22 @@ const handleLogout = () => {
 
         <!-- User Actions -->
         <div class="flex items-center gap-6">
-            <!-- 搜索框 (省略...) -->
+                    <!-- Search Bar (搜索框) -->
+        <div class="flex-1 max-w-md mx-8 hidden md:block">
+            <div class="relative group">
+                <input 
+                    v-model="searchQuery"
+                    type="text" 
+                    placeholder="搜一搜新鲜好物..." 
+                    @keyup.enter="handleSearch"
+                    class="w-full bg-gray-100 border-transparent focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 rounded-full py-2 pl-10 pr-4 transition-all outline-none text-sm"
+                >
+                <Search 
+                    class="absolute left-3 top-2.5 w-4 h-4 text-gray-400 group-focus-within:text-emerald-500 transition-colors cursor-pointer" 
+                    @click="handleSearch"
+                />
+            </div>
+        </div>
 
             <!-- 购物车 -->
             <div class="relative cursor-pointer group" @click="router.push('/cart')">
