@@ -14,3 +14,17 @@ export interface BannerItem {
     title?: string;
     href?: string;
 }
+
+export interface OrderGoods {
+  id: string | number;
+  name: string;
+  image: string;
+  price: string | number;
+  count: number;
+}
+
+export interface OrderAddress {
+  address: string;
+  receiver: string;
+  phone: string;
+}

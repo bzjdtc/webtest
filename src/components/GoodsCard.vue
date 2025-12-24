@@ -1,18 +1,31 @@
 <script setup lang="ts">
 import type { Product } from '@/types'
+import { useRouter } from 'vue-router' // 1. 引入 useRouter
 
-defineProps<{
+const props = defineProps<{
     product: Product
 }>()
 
 const emit = defineEmits<{
     (e: 'add-cart', product: Product): void
 }>()
+
+const router = useRouter() // 2. 获取 router 实例
+
+// 3. 跳转详情页方法
+const goToDetail = () => {
+    router.push(`/product/${props.product.id}`)
+}
 </script>
 
 <template>
-  <div class="bg-white hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden group cursor-pointer">
+  <!-- 4. 修改处：添加 @click="goToDetail" -->
+  <div 
+    @click="goToDetail"
+    class="bg-white hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden group cursor-pointer"
+  >
       <div class="relative overflow-hidden aspect-[1/1]">
+          <!-- 图片懒加载建议在生产环境使用，这里直接 src -->
           <img :src="product.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
       </div>
       <div class="p-4 text-center">

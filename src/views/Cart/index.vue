@@ -148,7 +148,11 @@ const handleCheckAll = (e: Event) => {
                 <span class="text-gray-600 mr-2">合计:</span>
                 <span class="text-2xl font-bold text-red-500">¥{{ cartStore.selectedPrice }}</span>
             </div>
-            <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-medium transition shadow-lg shadow-emerald-200">
+            <!-- 修改处：添加 @click 跳转到 checkout -->
+            <button 
+                @click="router.push('/checkout')"
+                class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-medium transition shadow-lg shadow-emerald-200"
+            >
                 去结算
             </button>
         </div>

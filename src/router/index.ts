@@ -4,6 +4,9 @@ import Login from '@/views/Login/index.vue'
 import Music from '@/views/Music/MusicPlayer.vue'
 import Cart from '@/views/Cart/index.vue'
 import Signin from '@/views/Signin/index.vue'
+import Pay from '@/views/Pay/index.vue'
+import Checkout from '@/views/Checkout/index.vue'
+import Member from '@/views/Member/index.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -13,7 +16,8 @@ const router = createRouter({
       component: Layout,
       children: [
         { path: '', name: 'Home', component: () => import('@/views/Home/index.vue') },
-        { path: 'category/:id', name: 'Category', component: () => import('@/views/Category/index.vue') }
+        { path: 'category/:id', name: 'Category', component: () => import('@/views/Category/index.vue') },
+        { path: 'product/:id', name: 'product', component: () => import('@/views/Goods/index.vue') }
       ]
     },
     {
@@ -34,7 +38,19 @@ const router = createRouter({
     { path: '/signin',
       name: 'Signin',
       component: Signin  
-    }
+    },
+    { path: '/pay',
+      name: 'Pay',
+      component: Pay  
+    },
+    { path: '/checkout',
+      name: 'Checkout',
+      component: Checkout 
+    },
+    { path: '/member',
+      name: 'Member',
+      component: Member 
+    },
   ],
   scrollBehavior() {
     return { top: 0 }

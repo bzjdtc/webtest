@@ -69,7 +69,7 @@ const handleLogout = () => {
         </div>
 
             <!-- 购物车 -->
-            <div class="relative cursor-pointer group" @click="router.push('/cart')">
+            <div class="relative cursor-pointer group" @click="router.push({name: 'Cart'})">
                 <ShoppingCart class="w-6 h-6 text-gray-600 hover:text-emerald-500" />
                 <span v-if="cartStore.totalCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
                     {{ cartStore.totalCount }}
@@ -79,7 +79,9 @@ const handleLogout = () => {
             <!-- 用户信息/登录 -->
             <div class="flex items-center gap-3 text-sm">
                 <template v-if="userInfo">
-                    <div class="flex items-center gap-2 text-gray-600 hover:text-emerald-500 cursor-pointer">
+                    <div @click="router.push({name: 'Member'})"
+                         class="flex items-center gap-2 text-gray-600 hover:text-emerald-500 cursor-pointer group"
+                    >
                         <img :src="userInfo.avatar" class="w-8 h-8 rounded-full border border-gray-200">
                         <span>{{ userInfo.account }}</span>
                     </div>
@@ -88,9 +90,9 @@ const handleLogout = () => {
                     </button>
                 </template>
                 <template v-else>
-                    <router-link to="/login" class="text-emerald-500 font-medium hover:underline">请先登录</router-link>
+                    <router-link :to="{name:'Login'}" class="text-emerald-500 font-medium hover:underline">请先登录</router-link>
                     <span class="text-gray-300">|</span>
-                    <router-link to="/signin" class="text-gray-500 hover:text-gray-800">免费注册</router-link>
+                    <router-link :to="{name: 'Signin'}" class="text-gray-500 hover:text-gray-800">免费注册</router-link>
                     <!-- <a href="#" class="text-gray-500 hover:text-gray-800">免费注册</a> -->
                 </template>
             </div>
